@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
-import { AsyncStorage, View, Text, TextInput, StyleSheet } from 'react-native';
+import {
+  AsyncStorage,
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Button,
+} from 'react-native';
 
 export default class AsyncStorageScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      myKey: '',
+      storedValue: '',
+      inputValue: '',
     };
   }
 
@@ -13,43 +21,49 @@ export default class AsyncStorageScreen extends Component {
     this._loadStorage();
   }
 
-  async _loadStorage() {
+  _loadStorage = async () => {
     try {
-      const value = await AsyncStorage.getItem('myKey');
+      const value = await AsyncStorage.getItem('storedValue');
       if (value != null) {
         this.setState({
-          myKey: value,
+          storedValue: value,
         });
       }
     } catch (error) {
-      console.err(error);
+      console.log(error);
     }
-  }
+  };
 
-  async _saveData(value) {
+  _onChangeText = value => {
+    this.setState({
+      inputValue: value,
+    });
+  };
+
+  _onBtnPress = async () => {
     try {
-      await AsyncStorage.setItem('myKey', value);
-      this.setState({
-        myKey: value,
-      });
+      await AsyncStorage.setItem('storedValue', this.state.inputValue);
+      this._loadStorage();
     } catch (error) {
-      console.err(error);
+      console.log(error);
     }
-  }
+  };
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.saved}>{this.state.myKey}</Text>
+        <Text style={styles.saved}>{this.state.storedValue}</Text>
         <Text style={styles.instructions}>
           Type something into the text box below. It will be saved to device
           storage. Next time you open the application, the saved data will still
           exist.
         </Text>
         <TextInput
-          onChangeText={text => this._saveData(text)}
+          onChangeText={text => this._onChangeText(text)}
           style={styles.formInput}
+          value={this.state.inputValue}
         />
+        <Button onPress={this._onBtnPress} title="Save" />
       </View>
     );
   }
@@ -58,14 +72,12 @@ export default class AsyncStorageScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
   },
   formInput: {
-    flex: 1,
-    height: 26,
+    height: 40,
     fontSize: 13,
     borderWidth: 1,
-    borderColor: '#555555',
+    borderColor: 'gray',
   },
   saved: {
     fontSize: 20,

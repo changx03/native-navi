@@ -47,7 +47,6 @@ const NavigationStack = TabNavigator(
     },
   },
   {
-    tabBarPosition: 'bottom',
     animationEnabled: true,
     swipeEnabled: false,
   }
