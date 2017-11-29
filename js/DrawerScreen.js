@@ -3,30 +3,14 @@ import { View, Text } from 'react-native';
 import { DrawerNavigator } from 'react-navigation';
 import AsyncStorageScreen from './AsyncStorageScreen';
 import AsnycStorageListScreen from './AsyncStorageListScreen';
-
-const FirstDrawerScreen = () => (
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text>First Drawer Screen</Text>
-  </View>
-);
-
-const SecondDrawerScreen = () => (
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text>Second Drawer Screen</Text>
-  </View>
-);
+import LongListScreen from './LongListScreen';
+import JsonTestScreen from './JsonTestScreen';
 
 const DrawerScreen = DrawerNavigator({
   FirstDrawer: {
-    screen: FirstDrawerScreen,
+    screen: JsonTestScreen,
     navigationOptions: {
-      drawerLabel: 'Demo screen 1',
-    },
-  },
-  SecondDrawer: {
-    screen: SecondDrawerScreen,
-    navigationOptions: {
-      drawerLabel: 'Demo screen 2',
+      drawerLabel: 'Json test',
     },
   },
   AsyncStorage: {
@@ -39,6 +23,12 @@ const DrawerScreen = DrawerNavigator({
     screen: AsnycStorageListScreen,
     navigationOptions: {
       drawerLabel: 'Storage list demo',
+    },
+  },
+  LongList: {
+    screen: LongListScreen,
+    navigationOptions: {
+      drawerLabel: 'Supler long list',
     },
   },
 });

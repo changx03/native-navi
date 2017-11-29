@@ -7,8 +7,8 @@ import ProfileScreen from './ProfileScreen';
 import DrawerScreen from './DrawerScreen';
 
 /**
- * Note: Ionicons only works for IOS navigation menu. 
- * In Android, use Icon instead. 
+ * Note: Ionicons only works for IOS navigation menu.
+ * In Android, use Icon instead.
  * Full details: https://github.com/oblador/react-native-vector-icons#andoird
  */
 const NavigationStack = TabNavigator(
@@ -42,13 +42,18 @@ const NavigationStack = TabNavigator(
     Drawer: {
       screen: DrawerScreen,
       navigationOptions: {
-        tabBarLabel: 'Custom drawer?',
+        tabBarLabel: 'Custom',
       },
     },
   },
   {
     animationEnabled: true,
     swipeEnabled: false,
+    tabBarOptions: {
+      style: {
+        height: 50,
+      },
+    },
   }
 );
 
