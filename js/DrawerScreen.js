@@ -5,6 +5,7 @@ import AsyncStorageScreen from './AsyncStorageScreen';
 import AsnycStorageListScreen from './AsyncStorageListScreen';
 import LongListScreen from './LongListScreen';
 import JsonTestScreen from './JsonTestScreen';
+import TeamListScreen from './TeamListScreen';
 
 const DrawerScreen = DrawerNavigator({
   FirstDrawer: {
@@ -22,13 +23,19 @@ const DrawerScreen = DrawerNavigator({
   StorageList: {
     screen: AsnycStorageListScreen,
     navigationOptions: {
-      drawerLabel: 'Storage list demo',
+      drawerLabel: 'Team demo helper',
     },
   },
   LongList: {
     screen: LongListScreen,
     navigationOptions: {
       drawerLabel: 'Supler long list',
+    },
+  },
+  TeamList: {
+    screen: TeamListScreen,
+    navigationOptions: {
+      drawerLabel: 'My team',
     },
   },
 });

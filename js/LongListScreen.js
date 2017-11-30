@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { SearchBar } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as _ from 'lodash';
 import { employeeData } from './data';
 
@@ -33,17 +34,70 @@ export default class SuperLongList extends Component {
   _keyExtractor = (item, index) => item.EmployeeID;
 
   _renderItem = ({ item }) => (
-    <View style={{ height: 30 }}>
-      <Text
-        style={{ paddingHorizontal: 20, fontSize: 16 }}
-        onPress={() => {
-          console.log(item.EmployeeID);
+    <View
+      style={{
+        flex: 1,
+        padding: 6,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+      }}
+    >
+      <View
+        style={{
+          flex: 1,
         }}
       >
-        {item.Name}
-      </Text>
+        <Text style={{ paddingHorizontal: 10, fontSize: 15 }}>{item.Name}</Text>
+        <Text style={{ paddingHorizontal: 10, fontSize: 13, color: '#616161' }}>
+          {item.EmployeeID}
+        </Text>
+      </View>
+      {item.EmployeeID % 2 === 0
+        ? this._renderTickBtn(item)
+        : this._renderRemoveBtn(item)}
     </View>
   );
+
+  _renderSeparator = () => (
+    <View
+      style={{
+        height: 1,
+        width: '90%',
+        backgroundColor: '#CED0CE',
+        marginHorizontal: '5%',
+      }}
+    />
+  );
+
+  _renderTickBtn = item => (
+    <View>
+      <Icon
+        name="done"
+        color="dodgerblue"
+        onPress={() => {
+          this._onListItemBtnPress(item);
+        }}
+        size={30}
+      />
+    </View>
+  );
+
+  _renderRemoveBtn = item => (
+    <View>
+      <Icon
+        name="clear"
+        color="orangered"
+        onPress={() => {
+          this._onListItemBtnPress(item);
+        }}
+        size={30}
+      />
+    </View>
+  );
+
+  _onListItemBtnPress = item => {
+    console.log(item.EmployeeID);
+  };
 
   render() {
     const Touchable =
@@ -62,7 +116,7 @@ export default class SuperLongList extends Component {
           onChangeText={text => {
             this.setState({
               currentList: employees.filter(item =>
-                _.includes(item.Name, text)
+                _.includes(item.Name + item.EmployeeID.toString(), text)
               ),
             });
           }}
@@ -78,6 +132,7 @@ export default class SuperLongList extends Component {
             this.listRef = ref;
           }}
           keyExtractor={this._keyExtractor}
+          ItemSeparatorComponent={this._renderSeparator}
         />
         <Touchable
           accessibilityComponentType="button"

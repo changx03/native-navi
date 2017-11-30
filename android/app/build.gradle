@@ -82,7 +82,7 @@ apply from: "../../node_modules/react-native/react.gradle"
  *  https://github.com/oblador/react-native-vector-icons#andoird
  */
 project.ext.vectoricons = [
-        iconFontNames: ['MaterialCommunityIcons.ttf']
+        iconFontNames: ['MaterialIcons.ttf', 'MaterialCommunityIcons.ttf']
 ]
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
